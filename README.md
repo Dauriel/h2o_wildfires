@@ -23,6 +23,8 @@ Our approach consists on a lightweight YoloV5s model trained to detect smoke. Th
 
 The solution is in the form of a jupyter notebook that contains detailed descriptions of each step. We developed the code on a Google Colab instance, so just by uploading it and running it fully you should obtain equivalent results to ours.
 
+# Results
 
+![Mosaic of our results](https://github.com/Dauriel/h2o_wildfires/blob/main/detection_sprit.png)
 
 
