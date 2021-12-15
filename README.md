@@ -19,3 +19,4 @@ Our approach intends to breach this by using a lightweight AI-based prediction m
 
 # Technical Documentation
 
+Our approach consists on a lightweight YoloV5s model trained to detect smoke. This model is trained over the [Ai for Mankind](https://aiformankind.org/)  
