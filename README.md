@@ -11,7 +11,7 @@ Unfortunately, we found out about this challenge just one week ago, so we have t
 # Our Project
 
 While satellite and aerial monitoring (through the use of planes, helicopters or UAVs) can provide a wide view and may be sufficient to monitor very large, low risk terrain areas, 
-we find that it is not ideal for high risk areas. The slow refresh rate of satellites and the high costs of maintaining an aerial monitoring infrastructure to track these hazard-prone areas make it highly inefficient and in most cases not feasible at all. This areas are usually monitored by means of fire lookouts.
+we find that it is not ideal for high risk areas. These areas can be monitored by means of fire lookouts.
 
 Currently, there are some fire lookouts in towers that are used as a means of early detection of forest fires. However, accurate human observation may be limited by operator fatigue, time of day, time of year, and geographic location. Electronic systems have gained popularity in recent years as a possible resolution to human operator error. A government report on a recent trial of three automated camera fire detection systems in Australia did, however, conclude "...detection by the camera systems was slower and less reliable than by a trained human observer".
 
