@@ -4,7 +4,7 @@ We live in a difficult era. Climate change is now the biggest challenge humanity
 
 Wildfires are one of the most frequent and recurrent disasters our world faces yearly. They burn thousands of kilometres of land a year, causing millions of dollars in damages and destroying not only the habitats of millions of species that populate our planet, but creating lasting long term effects in an already fragile planet. According to the Copernicus Atmosphere Monitoring Service scientists, global wildfires in 2021 caused an estimated total of 1760 megatonnes of carbon emissions, which is the equivalent of 6450 megatonnes of CO2. To put this figure into some perspective – total CO2 emissions from fossil fuel in the EU in 2020 amounted to 2600 megatonnes, in other words - wildfires this year generated 148% more than total EU fossil fuel emissions in 2020.
 
-Being able to detect wildfires fast and effectively, and respond in time is key to minimize the potential damage they will cause. 
+Being able to detect wildfires fast and effectively, to be able to respond in time, is key to minimize the potential damage they will cause. 
 
 # Our Project
 
