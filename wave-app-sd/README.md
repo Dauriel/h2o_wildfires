@@ -33,11 +33,19 @@ git clone https://github.com/Dauriel/h2o_wildfires.git
 
 ### 3. Run your Wave app
 
-This step is using installed h2o-wave package to run the application.
+Install requirements
 
 ```bash
 cd wave-app-sd
-wave sage-identification-pipeline/app.py
+pip install -r requirements.txt
+```
+
+### 4. Run your Wave app
+
+This step is using installed h2o-wave package to run the application.
+
+```bash
+wave run sage-identification-pipeline/app.py
 ```
 
 Point your web browser to http://localhost:10101/ to access the app and enjoy.
