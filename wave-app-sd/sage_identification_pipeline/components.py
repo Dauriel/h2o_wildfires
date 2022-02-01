@@ -9,7 +9,7 @@ from .constants import detection_model_tags, classification_model_tags
 def get_meta(side_panel=False):
     return ui.meta_card(
         box='',
-        title='WBIA Identification Pipeline',
+        title='H2O.ai Fights Fires',
         layouts=get_layouts(side_panel=side_panel),
     )
 
@@ -22,8 +22,8 @@ def get_logo(q: Q):
 def get_title(q: Q):
     return ui.section_card(
         box='header',
-        title='WBIA Identification Pipeline',
-        subtitle='Created by Wild Me for the H2O.AI Hybrid Cloud Appstore',
+        title='H2O.ai Fights Fires',
+        subtitle='Wildfire Prediction Challenge',
         items=[],
     )
 
