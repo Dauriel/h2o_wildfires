@@ -30,10 +30,15 @@ def get_title(q: Q):
 def get_target_image(q: Q):
     return ui.form_card(
         box='left',
-        title='Target image',
+        title='Challenge overview',
         items=[
             ui.text(''), # margin top hack
-            ui.text('WBIA will process the target image using pre-trained image analysis models. The detection model attempts to draw a box around each individual in the target image. The classification model vets the boxes (annotations) for quality. The identification model compares each annotation to our database of individuals to try to find matches.'),
+            ui.text('We live in a difficult era. Climate change is now the biggest challenge humanity has yet to beat. Intense droughts, storms, rising sea levels, ... are just some of the events that are becoming more and more common nowadays. Extreme temperatures, severe lightning, strong winds, dry weather and droughts create the ideal conditions for the main theme of this competition: Wildfires. Wildfires are one of the most frequent and recurrent disasters our world faces yearly. They burn thousands of kilometres of land a year, causing millions of dollars in damages and destroying not only the habitats of millions of species that populate our planet, but creating lasting long term effects in an already fragile planet. According to the Copernicus Atmosphere Monitoring Service scientists, global wildfires in 2021 caused an estimated total of 1760 megatonnes of carbon emissions, which is the equivalent of 6450 megatonnes of CO2. To put this figure into some perspective – total CO2 emissions from fossil fuel in the EU in 2020 amounted to 2600 megatonnes, in other words - wildfires this year generated 148% more than total EU fossil fuel emissions in 2020. Being able to detect wildfires fast and effectively, to be able to respond in time, is key to minimize the potential damage they will cause.'),
+            
+            ui.text(''), # margin top hack
+            ui.text('Our approach intends to solve and automate this by using a lightweight AI-based prediction model to automatically detect the emergence of smoke. This model could be used with a real time image system to rapidly alert the authorities would it detect smoke in a given camera or recording device.'),
+            
+            
             ui.button(
                 name='open_upload_image_dialog',
                 label='Upload target image',
@@ -80,13 +85,13 @@ def get_action_card(q: Q):
                 tooltip='The classification model is used to label the annotations with species, viewpoint, and confidence score.',
             ),
             ui.slider(
-                name='sensitivity',
-                label='Sensitivity',
-                min=0.2,
-                max=1,
+                name='epochs',
+                label='epochs',
+                min=1,
+                max=300,
                 value=sliderSensitivity,
-                step=0.01,
-                tooltip='Lower sensitivity scores result in more annotations.',
+                step=2,
+                tooltip='Chosse how many epochs you want to use',
             ),
             ui.slider(
                 name='nms',
@@ -307,7 +312,7 @@ def get_results_table(q: Q):
 def get_footer():
     return ui.footer_card(
         box=ui.box('footer', order=1),
-        caption='Made with 💛️ using [Wave](https://h2oai.github.io/wave/). (c) 2021 [Wild Me](https://www.wildme.org/). All rights reserved.',  # noqa: E501
+        caption='Made by HTB Team - All rights reserved',  # noqa: E501
     )
 
 
