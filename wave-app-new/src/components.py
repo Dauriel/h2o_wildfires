@@ -40,7 +40,7 @@ def get_target_image_display(q: Q):
 
 def get_action_card(q: Q):
     sliderNms = q.args.nms if 'nms' in q.args else 0.4
-    sliderSensitivity = q.args.sensitivity if 'sensitivity' in q.args else 0.4
+    sliderSensitivity = q.args.sensitivity if 'sensitivity' in q.args else 60
 
     return ui.form_card(
         box='right',
@@ -54,9 +54,9 @@ def get_action_card(q: Q):
                 max=100,
                 value=sliderSensitivity,
                 step=1,
-                tooltip='Chose the cutoff sensitivity of the model. Only ',
+                tooltip='Chose the cutoff sensitivity of the model.',
             ),
-            ui.button(name='run', label='Run identification pipeline', primary=True, disabled=not q.app.target_image or q.app.running_pipeline),
+            ui.button(name='run', label='Detect smoke', primary=True, disabled=not q.app.target_image or q.app.running_pipeline),
         ],
     )
 

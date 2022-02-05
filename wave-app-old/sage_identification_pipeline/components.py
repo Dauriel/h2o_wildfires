@@ -401,7 +401,9 @@ async def make_example_image_dialog(q: Q):
                         for img in q.app.example_images
                     ],
                 ),
-                ui.button(name='example_image_chosen', label='Select', primary=True)
+                ui.button(name='example_image_chosen', label='Select', primary=True),
+                ui.button(name='example_image_chosen', label='Select', primary=True),
+                # Note: wave seems to be ignoring the last item in this list, hence the duplicate item.
             ],
         )
     else:

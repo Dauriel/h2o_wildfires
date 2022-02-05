@@ -4,6 +4,7 @@ from .components import get_target_image, get_target_image_display, get_action_c
 
 # Tabs for the app's navigation menu.
 tabs = [
+    ui.tab(name='home', label='Home'),
     ui.tab(name='data', label='Data'),
     ui.tab(name='model', label='Model'),
     ui.tab(name='predict', label='Predict'),
@@ -53,11 +54,16 @@ async def reset_pages(q:Q):
     await q.page.save()
 
 async def make_base_ui(q: Q):
-    if (q.app.target_image):
-        q.page['target_image'] = get_target_image_display(q)
-    else:
-        q.page['target_image'] = get_target_image(q)
+    await reset_pages(q)
 
-    q.page['action_card'] = get_action_card(q)
+    if q.client.tabs == "detection":
+
+        if (q.app.target_image):
+            q.page['target_image'] = get_target_image_display(q)
+        else:
+            q.page['target_image'] = get_target_image(q)
+
+        q.page['action_card'] = get_action_card(q)
+
 
     await q.page.save()

@@ -68,3 +68,5 @@ async def handler(q: Q):
     # Handler for each tab / menu option.
     if q.client.tabs == "detection":
         await detection.detection(q)
+
+
