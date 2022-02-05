@@ -3,6 +3,7 @@ from h2o_wave import main, app, Q, ui
 from .ui_utils import init_ui
 from .data import load_datasets
 from .model import load_models
+from const import example_images
 
 def reset_pipeline_variables(q: Q):
     q.app.running_pipeline = False
@@ -31,6 +32,12 @@ async def init_client(q: Q):
 async def init_app(q:Q):
     # Get the list of available datasets.
     await load_datasets(q)
+
+    wave_paths = await q.site.upload([image['path'] for image in example_images])
+    for p, example_image in zip(wave_paths, example_images):
+        example_image.update({'wave_path': p})
+    q.app.example_images = example_images
+
     # Reset pipeline variables
     # TODO manage video pipeline vars
     reset_pipeline_variables(q)

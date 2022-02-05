@@ -61,11 +61,6 @@ async def load_datasets(q: Q):
     q.app. datasets = {}
     data_dir = 'data'
 
-    wave_paths = await q.site.upload([image['path'] for image in example_images])
-    for p, example_image in zip(wave_paths, example_images):
-        example_image.update({'wave_path': p})
-    q.app.example_images = example_images
-
     # For each csv.gz file in the data dir, make a dataframe and save it.
     for dataset_file in os.listdir(data_dir):
         if(dataset_file.endswith('csv.gz')):

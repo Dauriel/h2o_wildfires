@@ -15,7 +15,7 @@ def reset_pipeline_variables(q: Q):
     q.app.identification_in_progress = False
     q.app.identification_complete = False
 
-async def initialize_app(q: Q):
+async def jinitialize_app(q: Q):
     # Initialize only once per app instance
     if q.app.initialized:
         return

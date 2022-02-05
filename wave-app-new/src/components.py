@@ -77,3 +77,35 @@ async def make_upload_image_dialog(q: Q):
             # Note: wave seems to be ignoring the last item in this list, hence the duplicate item.
         ]
     )
+
+async def make_example_image_dialog(q: Q):
+    q.page['meta'].dialog = None
+    await q.page.save()
+
+    if 'example_images' in q.app:
+        q.page['meta'].dialog = ui.dialog(
+            title='Select example image',
+            closable=True,
+            items=[
+                ui.dropdown(
+                    name='example_image_selected',
+                    label='Select image',
+                    value=q.app.example_images[0]['wave_path'],
+                    choices=[
+                        ui.choice(name=img['wave_path'], label=img['label'])
+                        for img in q.app.example_images
+                    ],
+                ),
+                ui.button(name='example_image_chosen', label='Select', primary=True)
+            ],
+        )
+    else:
+        q.page['meta'].dialog = ui.dialog(
+            title='Loading example images',
+            closable=True,
+            items=[
+                ui.text('Example images have not loaded yet. Check back in a few seconds.')
+            ],
+        )
+
+    await q.page.save()

@@ -1,7 +1,7 @@
 import os
 from .ui_utils import *
 
-from .components import get_target_image, get_target_image_display, get_action_card
+from .components import make_example_image_dialog
 
 TOOL_INFO = '''
 This page allows to create smoke detection starting from images;
@@ -9,11 +9,20 @@ This page allows to create smoke detection starting from images;
 
 
 async def detection(q:Q):
-    if (q.app.target_image):
-        q.page['target_image'] = get_target_image_display(q)
-    else:
-        q.page['target_image'] = get_target_image(q)
+    if q.args.open_upload_image_dialog:
+        #TODO Handle image uploading
+        print('Unhandled button')
+    elif q.args.open_example_image_dialog:
+        await open_example_image_dialog(q)
+    elif q.args.example_image_chosen:
+        await example_image_chosen(q)
 
-    q.page['action_card'] = get_action_card(q)
 
+async def open_example_image_dialog(q: Q):
+    await make_example_image_dialog(q)
     await q.page.save()
+
+async def example_image_chosen(q: Q):
+    q.page['meta'].dialog = None
+    q.app.target_image = q.args.example_image_selected
+    await make_base_ui(q)

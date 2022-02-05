@@ -21,7 +21,7 @@ async def serve(q: Q):
 
 # A FLEX LAYOUT FOR AN ADAPTIVE UI
 async def layouts(q:Q):
-    q.page['meta'] = ui.meta_card(box='', theme='h2o-light', title = 'Challenge Wildfires | HTB Team', layouts=[
+    q.page['meta'] = ui.meta_card(box='', theme='h2o-light', title = 'Smoke Detection | HTB Team', layouts=[
         # Apply layout to all viewport widths.
         ui.layout(breakpoint='xs', zones=[
             # Predefine app's wrapper height to 100% viewpoer height.
@@ -59,6 +59,7 @@ async def handler(q: Q):
 
     # Display the menu bar with different tabs.
     await render_menu(q)
+    await make_base_ui(q)
 
     # Handler for each tab / menu option.
     if q.client.tabs == "data":

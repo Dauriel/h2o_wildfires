@@ -1,5 +1,7 @@
 from h2o_wave import main, app, Q, ui
 
+from .components import get_target_image, get_target_image_display, get_action_card, make_example_image_dialog
+
 # Tabs for the app's navigation menu.
 tabs = [
     ui.tab(name='data', label='Data'),
@@ -50,3 +52,12 @@ async def reset_pages(q:Q):
     
     await q.page.save()
 
+async def make_base_ui(q: Q):
+    if (q.app.target_image):
+        q.page['target_image'] = get_target_image_display(q)
+    else:
+        q.page['target_image'] = get_target_image(q)
+
+    q.page['action_card'] = get_action_card(q)
+
+    await q.page.save()
