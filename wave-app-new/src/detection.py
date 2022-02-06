@@ -26,6 +26,9 @@ async def detection(q:Q):
     elif q.args.target_image_upload:
         await target_image_upload(q)
 
+    elif q.args.run:
+        await run(q)
+
 async def open_upload_image_dialog(q: Q):
     await make_upload_image_dialog(q)
     await q.page.save()
@@ -51,3 +54,20 @@ async def target_image_upload(q: Q):
         q.app.target_image = links[0]
         q.page['meta'].dialog = None
         await make_base_ui(q)
+
+
+async def run(q: Q):
+    local_image_path = await q.site.download(q.app.target_image, '.')
+    q.app.running_pipeline = True
+    await make_base_ui(q)
+
+    # await run_pipeline(q, local_image_path)
+
+    print('RUNNING')
+
+    # await q.run(run_pipeline, q, local_image_path)
+
+    # with concurrent.futures.ThreadPoolExecutor() as pool:
+    #     await q.exec(pool, run_pipeline, q, local_image_path)
+
+    await q.page.save()

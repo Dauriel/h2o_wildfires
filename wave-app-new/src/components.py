@@ -39,7 +39,6 @@ def get_target_image_display(q: Q):
     )
 
 def get_action_card(q: Q):
-    sliderNms = q.args.nms if 'nms' in q.args else 0.4
     sliderSensitivity = q.args.sensitivity if 'sensitivity' in q.args else 60
 
     return ui.form_card(
@@ -72,9 +71,7 @@ async def make_upload_image_dialog(q: Q):
                 label='Upload',
                 file_extensions=['jpg', 'png', 'jpeg'],
                 height='180px',
-            ),
-            ui.button(name='gah', label='gahh', primary=True),
-            # Note: wave seems to be ignoring the last item in this list, hence the duplicate item.
+            )
         ]
     )
 
@@ -109,3 +106,18 @@ async def make_example_image_dialog(q: Q):
         )
 
     await q.page.save()
+
+def get_stepper(q: Q):
+    return ui.form_card(
+        box='results',
+        items=[
+            ui.stepper(
+                name='pipeline-stepper',
+                items=[
+                    ui.step(label='Upload', icon='CloudUpload', done=bool(q.app.upload_complete)),
+                    ui.step(label='Detection', icon='BuildQueueNew', done=bool(q.app.detection_complete)),
+                    ui.step(label='Inspection', icon='Bullseye', done=bool(q.app.identification_complete)),
+                ],
+            )
+        ],
+    )

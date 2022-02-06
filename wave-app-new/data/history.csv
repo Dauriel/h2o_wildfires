@@ -1,0 +1,4 @@
+timestamp;file_name;smoke_detected;confidence
+2022-02-06 21:00:00;test no.1;1;90
+2022-02-06 22:00:00;test no.2;0;
+2022-02-06 23:00:00;test no.3;1;100

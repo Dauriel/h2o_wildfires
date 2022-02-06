@@ -2,7 +2,7 @@ from h2o_wave import main, app, Q, ui
 
 from .ui_utils import *
 from .initializers import *
-from . import data, model, predict, detection
+from . import home, data, model, predict, detection
 
 @app('/')
 async def serve(q: Q):
@@ -32,7 +32,9 @@ async def layouts(q:Q):
                 ui.zone('tabs'),
                 # Zone for the actual content and data.
                 ui.zone(name='body', size='1', zones=[
+                    ui.zone(name='home'),
                     ui.zone(name='data'),
+                    ui.zone(name='map'),
                     # Image Smoke Detection
                     ui.zone(
                         'split',
@@ -41,7 +43,8 @@ async def layouts(q:Q):
                             ui.zone('left', size='50%'),
                             ui.zone('right', size='50%'),
                         ],
-                    )
+                    ),
+                    ui.zone('results', size='100%', direction=ui.ZoneDirection.COLUMN)
                 ]),
                 # App footer of fixed sized, aligned in the center.
                 ui.zone(name='footer', size='120px', align='center')
@@ -60,6 +63,10 @@ async def handler(q: Q):
     # Display the menu bar with different tabs.
     await render_menu(q)
     await make_base_ui(q)
+
+    # Handler for each tab / menu option.
+    if q.client.tabs == "home":
+        await home.home(q)
 
     # Handler for each tab / menu option.
     if q.client.tabs == "data":

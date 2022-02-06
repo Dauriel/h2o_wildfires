@@ -1,6 +1,4 @@
-# H2O Olympics | Wildfire Challenge Submission
-
-### TEAM HTB - Last Minute Smoke Detection
+# TEAM HTB - Last Minute Smoke Detection
 
 We live in a difficult era. Climate change is now the biggest challenge humanity has yet to beat. Intense droughts, storms, rising sea levels, ... are just some of the events that are becoming more and more common nowadays. Extreme temperatures, severe lightning, strong winds, dry weather and droughts create the ideal conditions for the main theme of this competition: Wildfires. 
 
@@ -25,8 +23,8 @@ Our approach consists on a lightweight YoloV5s model trained to detect smoke. Th
 
 The solution is in the form of a jupyter notebook that contains detailed descriptions of each step. We developed the code on a Google Colab instance, so just by uploading it and running it fully you should obtain equivalent results to ours.
 
-### Results
+### Usage
 
-![Mosaic of our results](https://github.com/Dauriel/h2o_wildfires/blob/main/detection_sprit.png)
-
+* Image: detect smoke in a image (uploaded or from examples)
+* Video: detect smoke in a video (uploaded of from examples)
 

@@ -47,6 +47,7 @@ async def data(q:Q):
     fig = await q.run(show_bush_fires, df)
     # Convert plotly figure to html.
     html = await q.run(to_html, fig)
+
     # Render figure's html on on the form card.
     q.page['map'] = ui.form_card(box=ui.box('map', order=2), items=[
         ui.text(BUSHFIRE_INFO),
@@ -63,11 +64,12 @@ async def load_datasets(q: Q):
 
     # For each csv.gz file in the data dir, make a dataframe and save it.
     for dataset_file in os.listdir(data_dir):
-        if(dataset_file.endswith('csv.gz')):
+        if dataset_file.endswith('csv.gz'):
             # Read csv and make dataframe.
             path = f'{data_dir}/{dataset_file}'
             df = pd.read_csv(path, parse_dates=['acq_date'])
             # Add this dataset to the list of app's datasets.
             q.app.datasets[path] = df
+
 
 

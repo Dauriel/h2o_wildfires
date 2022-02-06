@@ -1,6 +1,6 @@
 from h2o_wave import main, app, Q, ui
 
-from .components import get_target_image, get_target_image_display, get_action_card, make_example_image_dialog
+from .components import get_target_image, get_target_image_display, get_action_card, make_example_image_dialog, get_stepper
 
 # Tabs for the app's navigation menu.
 tabs = [
@@ -8,7 +8,8 @@ tabs = [
     ui.tab(name='data', label='Data'),
     ui.tab(name='model', label='Model'),
     ui.tab(name='predict', label='Predict'),
-    ui.tab(name='detection', label='Image Detection')
+    ui.tab(name='detection', label='Image'),
+    ui.tab(name='realtime', label='Real Time')
 ]
 
 # Display header and footer just once per client.
@@ -46,7 +47,7 @@ async def make_markdown_table(fields, rows):
 
 # Each time a new tab is rendered, clean the 'body' zone, i.e. delete the pages for the other tabs.
 async def reset_pages(q:Q):
-    pages = ['df', 'map', 'models', 'metrics', 'options', 'target_image', 'action_card']
+    pages = ['df', 'hm', 'map', 'models', 'metrics', 'options', 'target_image', 'action_card', 'left', 'right']
 
     for page in pages:
         del q.page[page]
@@ -65,5 +66,6 @@ async def make_base_ui(q: Q):
 
         q.page['action_card'] = get_action_card(q)
 
+        q.page['stepper'] = get_stepper(q)
 
     await q.page.save()
