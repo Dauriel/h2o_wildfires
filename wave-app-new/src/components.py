@@ -53,7 +53,7 @@ def get_action_card(q: Q):
                 max=100,
                 value=sliderSensitivity,
                 step=1,
-                tooltip='Chose the cutoff sensitivity of the model.',
+                tooltip='Chose the cutoff sensitivity of the models.',
             ),
             ui.button(name='run', label='Detect smoke', primary=True, disabled=not q.app.target_image or q.app.running_pipeline),
         ],
@@ -115,9 +115,23 @@ def get_stepper(q: Q):
                 name='pipeline-stepper',
                 items=[
                     ui.step(label='Upload', icon='CloudUpload', done=bool(q.app.upload_complete)),
-                    ui.step(label='Detection', icon='BuildQueueNew', done=bool(q.app.detection_complete)),
-                    ui.step(label='Inspection', icon='Bullseye', done=bool(q.app.identification_complete)),
+                    # ui.step(label='Detection', icon='Compare', done=bool(q.app.model_in_progress)),
+                    ui.step(label='Detection', icon='BuildQueueNew', done=bool(q.app.detection_in_progress)),
+                    ui.step(label='Inspection', icon='Bullseye', done=bool(q.app.detection_complete)),
                 ],
             )
         ],
     )
+
+def get_detection_progress_card(q: Q):
+    return ui.form_card(
+        box='detection',
+        items=[
+            ui.progress(label='Detection in progress', caption='Working...')
+        ]
+    )
+
+def get_predicted_image(q: Q):
+    return ui.form_card(box=ui.box('detection', order=2), items=[
+        ui.frame(content=q.app.predicted_html, height='600px'),
+    ])

@@ -4,6 +4,8 @@ from .ui_utils import *
 from .initializers import *
 from . import home, data, model, predict, detection
 
+
+
 @app('/')
 async def serve(q: Q):
     # Initialize app and client if not already initialized.
@@ -44,7 +46,8 @@ async def layouts(q:Q):
                             ui.zone('right', size='50%'),
                         ],
                     ),
-                    ui.zone('results', size='100%', direction=ui.ZoneDirection.COLUMN)
+                    ui.zone(name='results'),
+                    ui.zone(name='detection', align='start', size='100%', direction=ui.ZoneDirection.ROW)
                 ]),
                 # App footer of fixed sized, aligned in the center.
                 ui.zone(name='footer', size='120px', align='center')
@@ -75,5 +78,6 @@ async def handler(q: Q):
     # Handler for each tab / menu option.
     if q.client.tabs == "detection":
         await detection.detection(q)
+
 
 

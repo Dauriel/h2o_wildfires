@@ -19,7 +19,7 @@ async def predict(q:Q):
     models = list(q.app.models.keys())
     val = q.args.models or models[0]
  
-    # Show model selection/load inputs.
+    # Show models selection/load inputs.
     q.page['models'] = ui.form_card(box=ui.box('data'), items=[
             ui.combobox(name='models', label='Models', choices=models, value=val),
             ui.buttons(justify='center', items=[
@@ -28,7 +28,7 @@ async def predict(q:Q):
     ])
     await q.page.save()
 
-    # Load selected model if load is hit or prediction in progress.
+    # Load selected models if load is hit or prediction in progress.
     if q.args.load or q.args.predict:
         await predict_menu(q, val)
 
@@ -47,7 +47,7 @@ async def predict_menu(q:Q, val:str):
     ])
     await q.page.save()
 
-    # Make prediction using the loaded model.
+    # Make prediction using the loaded models.
     if q.args.predict:
         await predict_results(q, val)
 
@@ -75,7 +75,7 @@ async def model_predict(q:Q, val:str, year:str, month:int):
     test = X[X.year == int(year)]
     test = test[test.month == month]
 
-    # Use the model to predict.
+    # Use the models to predict.
     test['fire_prediction'] = model.predict(test[features])
     fig = show_predictions(test)
 
