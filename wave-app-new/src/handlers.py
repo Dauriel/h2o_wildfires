@@ -2,10 +2,10 @@ from .components import *
 from .ui_utils import make_base_ui
 from .plot import to_html
 
-from model.model_interface import ModelInference
 import plotly.express as px
 
 from skimage import io
+import time
 
 def reset_pipeline_variables(q: Q):
     q.app.running_pipeline = False
@@ -51,9 +51,12 @@ async def run(q: Q):
 
     hub_address = os.environ.get(f'H2O_WAVE_ADDRESS', 'http://127.0.0.1:10101')
     im = io.imread(f'{hub_address}{q.app.target_image}')
-    predictions = q.app.model.inference(im)
 
+    start = time.time()
+
+    predictions = q.app.model.inference(im)
     image = q.app.model.create_image(im, predictions)
+
 
     q.app.predicted_html = await q.run(to_html, px.imshow(image))
     q.app.detection_complete = True

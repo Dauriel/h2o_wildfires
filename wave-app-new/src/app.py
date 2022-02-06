@@ -4,7 +4,8 @@ from .ui_utils import *
 from .initializers import *
 from . import home, data, model, predict, detection
 
-
+import warnings
+warnings.filterwarnings("ignore")
 
 @app('/')
 async def serve(q: Q):

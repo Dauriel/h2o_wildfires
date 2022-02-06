@@ -5,7 +5,6 @@ from .components import *
 # Tabs for the app's navigation menu.
 tabs = [
     ui.tab(name='home', label='Home'),
-    ui.tab(name='predict', label='Predict'),
     ui.tab(name='detection', label='Image'),
     ui.tab(name='realtime', label='Real Time')
 ]

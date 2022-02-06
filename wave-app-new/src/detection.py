@@ -29,4 +29,4 @@ async def detection(q:Q):
 
 # Load app's existing models stored in the local file system.
 async def load_model(q: Q):
-    q.app.model = ModelInference('yolov5', 'model/model_artifacts.pt')
+    q.app.model = ModelInference('ultralytics/yolov5', 'model/model_artifacts.pt')
