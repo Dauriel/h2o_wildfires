@@ -19,6 +19,36 @@ def create_random_image():
 
 
 async def realtime(q:Q):
+
+    '''
+        import cv2
+
+        # define hub address
+        hub_address = os.environ.get(f'H2O_WAVE_ADDRESS', 'http://127.0.0.1:10101')
+
+        # load video from app
+        vidcap = cv2.VideoCapture(f'{hub_address}/{q.app.stored_video}')
+
+        success,image = vidcap.read()
+
+        prediction = q.app.model.inference(image)
+        v_image = q.app.model.create_image(image, prediction)
+
+        endpoint = await q.site.uplink(q.app.stored_video[...], 'image/jpeg', v_image)
+
+        count = 0
+        while success:
+            await q.site.uplink(q.app.stored_video[...], 'image/jpeg', v_image)
+
+            if count % 30 == 0:
+                prediction = q.app.model.inference(image)
+
+            success,image = vidcap.read()
+            v_image = q.app.model.create_image(image, prediction)
+
+            count += 1
+    '''
+
     # Mint a unique name for our image stream
     stream_name = f'stream/demo/{uuid.uuid4()}.jpeg'
 
