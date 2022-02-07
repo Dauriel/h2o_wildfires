@@ -41,13 +41,14 @@ async def layouts(q:Q):
                     # Image Smoke Detection
                     ui.zone(
                         'split',
+                        direction=ui.ZoneDirection.ROW,
                         zones=[
                             ui.zone('left', size='50%'),
                             ui.zone('right', size='50%'),
                         ],
                     ),
                     ui.zone(name='results'),
-                    ui.zone(name='detection', align='start', size='100%', direction=ui.ZoneDirection.ROW)
+                    ui.zone(name='detection', align='start', size='50%', direction=ui.ZoneDirection.ROW)
                 ]),
                 # App footer of fixed sized, aligned in the center.
                 ui.zone(name='footer', size='120px', align='center')

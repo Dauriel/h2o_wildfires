@@ -27,6 +27,7 @@ class ModelInference(object):
         prediction = self.model(img)
         return prediction.pandas().xyxy[0]
 
+
     def create_image(self,
                      img: "numpy.ndarray",
                      predictions: "pandas.DataFrame") -> "numpy.ndarray":
@@ -43,6 +44,6 @@ class ModelInference(object):
             ymax = int(row.ymax)
             cv2.rectangle(img, (xmin, ymin),
                           (xmax, ymax),
-                          (0, 0, 255), 2)
+                          (255, 0, 0), 2)
 
         return img

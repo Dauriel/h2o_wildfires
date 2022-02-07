@@ -29,7 +29,7 @@ async def init_client(q: Q):
 # App-level initialization, run-time information shared across all users.
 async def init_app(q:Q):
     # Get the list of available datasets.
-    await load_datasets(q)
+    # await load_datasets(q)
     await load_history(q)
     await load_model(q)
 
@@ -38,6 +38,9 @@ async def init_app(q:Q):
     for p, example_image in zip(wave_paths, example_images):
         example_image.update({'wave_path': p})
     q.app.example_images = example_images
+
+    # Load video
+    # ....
 
     # Reset pipeline variables
     reset_pipeline_variables(q)
