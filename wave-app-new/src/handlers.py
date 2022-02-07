@@ -52,11 +52,8 @@ async def run(q: Q):
     hub_address = os.environ.get(f'H2O_WAVE_ADDRESS', 'http://127.0.0.1:10101')
     im = io.imread(f'{hub_address}{q.app.target_image}')
 
-    start = time.time()
-
     predictions = q.app.model.inference(im)
     image = q.app.model.create_image(im, predictions)
-
 
     q.app.predicted_html = await q.run(to_html, px.imshow(image))
     q.app.detection_complete = True

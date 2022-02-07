@@ -6,7 +6,7 @@ from .components import *
 tabs = [
     ui.tab(name='home', label='Home'),
     ui.tab(name='detection', label='Image'),
-    ui.tab(name='realtime', label='Real Time')
+        ui.tab(name='realtime', label='Real Time')
 ]
 
 # Display header and footer just once per client.
@@ -72,5 +72,7 @@ async def make_base_ui(q: Q):
             q.page['detection'] = get_detection_progress_card(q)
         else:
             del q.page['detection']
+
+        del q.page['hm']
 
     await q.page.save()

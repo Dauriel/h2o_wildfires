@@ -2,7 +2,7 @@ from h2o_wave import main, app, Q, ui
 
 from .ui_utils import *
 from .initializers import *
-from . import home, data, model, predict, detection
+from . import home, detection, realtime
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -41,7 +41,6 @@ async def layouts(q:Q):
                     # Image Smoke Detection
                     ui.zone(
                         'split',
-                        direction=ui.ZoneDirection.ROW,
                         zones=[
                             ui.zone('left', size='50%'),
                             ui.zone('right', size='50%'),
@@ -73,12 +72,12 @@ async def handler(q: Q):
         await home.home(q)
 
     # Handler for each tab / menu option.
-    if q.client.tabs == "data":
-        await data.data(q)
-
-    # Handler for each tab / menu option.
     if q.client.tabs == "detection":
         await detection.detection(q)
+
+    # Handler for each tab / menu option.
+    if q.client.tabs == "realtime":
+        await realtime.realtime(q)
 
 
 
