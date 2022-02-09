@@ -35,7 +35,7 @@ class ModelInference(object):
         Creates rectangles for the bounding boxes in a given image
         :param img: ("numpy.ndarray") Image to be annotated
         :param predictions: ("pandas.DataFrame") DataFrame containing the bounding boxes
-        :return: ("numpy.ndarray") Annotated image
+        :return: ("numpy.ndarray") Annotated image (xmin, ymin, xmax, ymax, confidence)
         """
         for idx, row in predictions.iterrows():
             xmin = int(row.xmin)
