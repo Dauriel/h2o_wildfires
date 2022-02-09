@@ -2,6 +2,9 @@ from h2o_wave import main, app, Q, ui
 
 from .components import *
 
+import io
+import numpy as np
+
 # Tabs for the app's navigation menu.
 tabs = [
     ui.tab(name='home', label='Home'),
@@ -44,13 +47,14 @@ async def make_markdown_table(fields, rows):
 
 # Each time a new tab is rendered, clean the 'body' zone, i.e. delete the pages for the other tabs.
 async def reset_pages(q:Q):
-    pages = ['df', 'hm', 'map', 'models', 'metrics', 'options', 'target_image', 'action_card',
+    pages = ['df', 'hm', 'map', 'models', 'metrics', 'options', 'target_image', 'target_video', 'action_card',
              'left', 'right', 'stepper', 'detection']
 
     for page in pages:
         del q.page[page]
     
     await q.page.save()
+
 
 async def make_base_ui(q: Q):
     await reset_pages(q)
@@ -73,6 +77,29 @@ async def make_base_ui(q: Q):
         else:
             del q.page['detection']
 
-        del q.page['hm']
+    if q.client.tabs == "realtime":
+
+        if (q.app.target_video):
+            hub_address = os.environ.get(f'H2O_WAVE_ADDRESS', 'http://127.0.0.1:10101')
+            vidcap = cv2.VideoCapture(f'{hub_address}{q.app.target_video}')
+            success, image = vidcap.read()
+
+            r_image = cv2.resize(image, dsize=(640, 480), interpolation=cv2.INTER_CUBIC)
+
+            if success:
+                _, img = cv2.imencode('.jpg', r_image.astype(np.uint8))
+                io.BytesIO(img)
+                endpoint = await q.site.uplink('stream_1', 'image/jpeg', io.BytesIO(img))
+                q.page['target_video'] = get_target_video_display(q, endpoint)
+
+                await q.page.save()
+            else:
+                q.page['target_video'] = get_target_video(q)
+        else:
+            q.page['target_video'] = get_target_video(q)
+
+        q.page['action_card'] = get_action_card_video(q)
+
+        q.page['stepper'] = get_stepper(q)
 
     await q.page.save()

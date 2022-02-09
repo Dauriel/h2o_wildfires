@@ -2,6 +2,7 @@ import os
 from .ui_utils import *
 from .handlers import *
 import io
+from .ui_utils import make_base_ui
 import time
 import uuid
 
@@ -21,6 +22,9 @@ def create_random_image():
 async def realtime(q:Q):
 
     '''
+
+        ### STORE THE VIDEOS IN q.app.stored_video
+
         import cv2
 
         # define hub address
@@ -49,7 +53,7 @@ async def realtime(q:Q):
             count += 1
     '''
 
-    # Mint a unique name for our image stream
+    '''# Mint a unique name for our image stream
     stream_name = f'stream/demo/{uuid.uuid4()}.jpeg'
 
     # Send image
@@ -65,6 +69,23 @@ async def realtime(q:Q):
         # Send image (use stream name as before).
         await q.site.uplink(stream_name, 'image/jpeg', create_random_image())
 
-    await q.site.unlink(stream_name)
+    await q.site.unlink(stream_name)'''
 
-    print(f'{frame_count / (time.time() - t0)}fps')
+    if q.args.open_upload_video_dialog:
+        await open_upload_video_dialog(q)
+
+    elif q.args.open_example_video_dialog:
+        await open_example_video_dialog(q)
+
+    elif q.args.example_video_chosen:
+        await example_video_chosen(q)
+
+    elif q.args.reset_target_video:
+        await reset_target_video(q)
+
+    elif q.args.target_video_upload:
+        await target_video_upload(q)
+
+    elif q.args.play:
+        q.app.reset_video = True
+        await play(q)
