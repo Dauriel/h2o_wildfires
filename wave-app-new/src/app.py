@@ -41,13 +41,14 @@ async def layouts(q:Q):
                     # Image Smoke Detection
                     ui.zone(
                         'split',
+                        direction=ui.ZoneDirection.ROW,
                         zones=[
-                            ui.zone('left', size='50%'),
-                            ui.zone('right', size='50%'),
+                            ui.zone('left', size='50%', direction=ui.ZoneDirection.COLUMN),
+                            ui.zone('right', size='50%', direction=ui.ZoneDirection.COLUMN),
                         ],
                     ),
                     ui.zone(name='results'),
-                    ui.zone(name='detection', align='start', size='100%', direction=ui.ZoneDirection.ROW)
+                    ui.zone(name='detection', align='start', size='50%', direction=ui.ZoneDirection.ROW)
                 ]),
                 # App footer of fixed sized, aligned in the center.
                 ui.zone(name='footer', size='120px', align='center')
@@ -65,18 +66,26 @@ async def handler(q: Q):
 
     # Display the menu bar with different tabs.
     await render_menu(q)
-    await make_base_ui(q)
 
     # Handler for each tab / menu option.
     if q.client.tabs == "home":
+        reset_pipeline_variables(q)
+        await make_base_ui(q)
         await home.home(q)
 
     # Handler for each tab / menu option.
     if q.client.tabs == "detection":
+        reset_pipeline_variables(q)
+        q.app.target_video=None
+        await make_base_ui(q)
         await detection.detection(q)
 
     # Handler for each tab / menu option.
     if q.client.tabs == "realtime":
+        reset_pipeline_variables(q)
+        q.app.reset_video = True
+        q.app.target_image = None
+        await make_base_ui(q)
         await realtime.realtime(q)
 
 

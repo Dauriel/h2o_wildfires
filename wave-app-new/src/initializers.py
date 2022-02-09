@@ -1,11 +1,9 @@
 from h2o_wave import main, app, Q, ui
 
 from .ui_utils import init_ui
-from .data import load_datasets
 from .home import load_history
-from .model import load_models
 from .detection import load_model
-from const import example_images
+from const import example_images, example_videos
 
 def reset_pipeline_variables(q: Q):
     q.app.running_pipeline = False
@@ -13,13 +11,14 @@ def reset_pipeline_variables(q: Q):
     q.app.detection_in_progress = False
     q.app.detection_complete = False
 
+
 # A client is a private browser tab, which stores it's own run-time information.
 async def init_client(q: Q):
     # Render the header and footer.
     await init_ui(q)
 
     # Begin application flow with the data tab.
-    q.client.tabs = 'detection'
+    q.client.tabs = 'realtime'
 
     # Flag client as initialized.
     q.client.initialized = True
@@ -29,7 +28,7 @@ async def init_client(q: Q):
 # App-level initialization, run-time information shared across all users.
 async def init_app(q:Q):
     # Get the list of available datasets.
-    await load_datasets(q)
+    # await load_datasets(q)
     await load_history(q)
     await load_model(q)
 
@@ -39,7 +38,14 @@ async def init_app(q:Q):
         example_image.update({'wave_path': p})
     q.app.example_images = example_images
 
+    # Load example videos
+    wave_paths = await q.site.upload([video['path'] for video in example_videos])
+    for p, example_video in zip(wave_paths, example_videos):
+        example_video.update({'wave_path': p})
+    q.app.example_videos = example_videos
+
     # Reset pipeline variables
     reset_pipeline_variables(q)
+
     # Flag app as initialized.
     q.app.initialized = True
