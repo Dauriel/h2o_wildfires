@@ -9,6 +9,7 @@ import numpy as np
 import cv2
 import io
 
+import datetime
 import time
 
 def reset_pipeline_variables(q: Q):
@@ -111,6 +112,7 @@ async def play(q: Q):
     predictions = q.app.model.inference(r_image)
 
     count = 0
+    index = 0
     FPS = 1/30
 
     while success and q.app.reset_video:
@@ -119,6 +121,13 @@ async def play(q: Q):
 
         if count % 5:
             predictions = q.app.model.inference(r_image)
+            for idx, row in predictions.iterrows():
+                issue = []
+                issue.append(datetime.datetime.now())
+                issue.append(q.app.target_video.split('/')[-1])
+                issue.append(row.confidence)
+                q.app.issues.append(issue)
+                print("issue", issue)
 
         image = q.app.model.create_image(r_image, predictions)
 

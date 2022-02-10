@@ -47,5 +47,8 @@ async def init_app(q:Q):
     # Reset pipeline variables
     reset_pipeline_variables(q)
 
+    q.app.issues = []
+
     # Flag app as initialized.
     q.app.initialized = True
+

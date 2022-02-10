@@ -22,8 +22,8 @@ columns = [
     ui.table_column(name='created', label='Timestamp', sortable=True, data_type='time'),
     ui.table_column(name='file', label='File Name', sortable=True, searchable=True),
     ui.table_column(name='tag', label='Smoke Detected', cell_type=ui.tag_table_cell_type(name='tags', tags=[
-                    ui.tag(label='NO', color='$mint'),
-                    ui.tag(label='YES', color='$red'),
+                    ui.tag(label='FATAL', color='$red'),
+                    ui.tag(label='WARNING', color='$yellow')
                     ]
     )),
     ui.table_column(name='confidence', label='Confidence', sortable=True, )
@@ -43,7 +43,8 @@ async def home(q:Q):
     await q.page.save()
 
     # get history dataframe
-    df = q.app.detection_history
+    df = pd.DataFrame(q.app.issues, columns =['Timestamp', 'Camera', 'Confidence'])
+    df.Confidence = df.Confidence.astype('float64')
 
     # create monitoring table
     for row in df.itertuples(index=False):
@@ -52,8 +53,8 @@ async def home(q:Q):
             Issue(
                 timestamp=row[0],
                 text=row[1],
-                state=('YES' if row[2] == 1 else 'NO'),
-                confidence=row[3]
+                state=('FATAL' if row[2] >= 0.70 else 'WARNING'),
+                confidence=int(row[2]*100)
             )
         )
 
