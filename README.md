@@ -28,3 +28,24 @@ The solution is in the form of a jupyter notebook that contains detailed descrip
 ![Mosaic of our results](https://github.com/Dauriel/h2o_wildfires/blob/main/detection_sprit.png)
 
 
+
+# Step to run the APP
+
+1. Run wave server
+
+./waved
+
+2. Open an other session, navigate to the app folder and install the missing requirements
+
+cd wave-app-new
+pip install -r requirements.txt
+
+3. Run the application
+
+wave run --no-reload src/app.py 
+
+
+## Please note: 
+In Windows use sdk https://github.com/h2oai/wave/releases/tag/v0.18.0, therefore not the latest version which contains a bug.
+
+On MacOS it's possible to use the latest version: https://github.com/h2oai/wave/releases/tag/v0.20.0

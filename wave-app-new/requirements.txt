@@ -15,4 +15,4 @@ torch==1.10.2
 scikit-image==0.19.1
 seaborn==0.11.2
 torchvision==0.11.3
-
+Faker==12.2.0
