@@ -35,7 +35,7 @@ async def layouts(q:Q):
                 ui.zone('tabs'),
                 # Zone for the actual content and data.
                 ui.zone(name='body', size='1', zones=[
-                    ui.zone(name='home'),
+                    ui.zone(name='description'),
                     ui.zone(name='data'),
                     ui.zone(name='map'),
                     # Image Smoke Detection

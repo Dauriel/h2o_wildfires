@@ -9,7 +9,7 @@ import cv2
 def get_target_image(q: Q):
     return ui.form_card(
         box='left',
-        title='Challenge overview',
+        title='Input image card',
         items=[
             ui.text('Pick an image and detect smoke with the run button.'),
 
@@ -58,7 +58,7 @@ def get_target_video_display(q: Q, endpoint):
 def get_target_video(q: Q):
     return ui.form_card(
         box='left',
-        title='Challenge overview',
+        title='Input video card',
         items=[
             ui.text('Pick a video and detect smoke with the run button.'),
 
@@ -130,10 +130,10 @@ def get_action_card_video(q: Q):
 
     return ui.form_card(
         box='right',
-        title='Parameters',
+        title='Action card',
         items=[
             ui.text('Yolo Model - Smoke Detection'),
-            ui.button(name='play', label='Play and detect', primary=True, disabled=not q.app.target_video or q.app.running_pipeline),
+            ui.button(name='play', label='Detect', primary=True, disabled=not q.app.target_video or q.app.running_pipeline),
         ],
     )
 

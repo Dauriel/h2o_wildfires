@@ -12,6 +12,15 @@ tabs = [
         ui.tab(name='realtime', label='Real Time')
 ]
 
+DETECTION = 'Upload an image or select an example image on the left. Then use the "Run" button to run the detection ' \
+            'pipeline. This section serve as basic inference example.'
+REALTIME = 'Upload a video or select an example video on the left. Press "Detect" to run the pipeline and show the ' \
+           'detection within the video. In our idea, this area should be filled with several real-time cam videos. In ' \
+           'this way, this app would be useful to monitor the presence of wildfires in very wide territories with the ' \
+           'using of AI techniques.<br>**If the video does not load at the first attempt, please press the reset ' \
+           'button and try to upload it again.** '
+
+
 # Display header and footer just once per client.
 async def init_ui(q: Q):
     # Header card for title ecc .
@@ -47,12 +56,12 @@ async def make_markdown_table(fields, rows):
 
 # Each time a new tab is rendered, clean the 'body' zone, i.e. delete the pages for the other tabs.
 async def reset_pages(q:Q):
-    pages = ['df', 'hm', 'map', 'models', 'metrics', 'options', 'target_image', 'target_video', 'action_card',
+    pages = ['df', 'ds', 'map', 'models', 'metrics', 'options', 'target_image', 'target_video', 'action_card',
              'left', 'right', 'stepper', 'detection']
 
     for page in pages:
         del q.page[page]
-    
+
     await q.page.save()
 
 
@@ -60,6 +69,10 @@ async def make_base_ui(q: Q):
     await reset_pages(q)
 
     if q.client.tabs == "detection":
+        # Image detection description
+        q.page['ds'] = ui.form_card(box=ui.box('description', order=2), items=[
+            ui.message_bar(type='info', text=DETECTION)
+        ])
 
         if (q.app.target_image):
             q.page['target_image'] = get_target_image_display(q)
@@ -79,7 +92,17 @@ async def make_base_ui(q: Q):
 
     if q.client.tabs == "realtime":
 
+        # Realtime description
+        q.page['ds'] = ui.form_card(box=ui.box('description', order=2), items=[
+            ui.message_bar(type='info', text=REALTIME)
+        ])
+
         if (q.app.target_video):
+
+            q.page['hm'] = ui.form_card(box=ui.box('home', order=2), items=[
+                ui.message_bar(type='info', text=open('README.MD').read())
+            ])
+
             hub_address = os.environ.get(f'H2O_WAVE_ADDRESS', 'http://127.0.0.1:10101')
             vidcap = cv2.VideoCapture(f'{hub_address}{q.app.target_video}')
             success, image = vidcap.read()
@@ -88,7 +111,6 @@ async def make_base_ui(q: Q):
 
             if success:
                 _, img = cv2.imencode('.jpg', r_image.astype(np.uint8))
-                io.BytesIO(img)
                 endpoint = await q.site.uplink('stream_1', 'image/jpeg', io.BytesIO(img))
                 q.page['target_video'] = get_target_video_display(q, endpoint)
 
@@ -99,7 +121,5 @@ async def make_base_ui(q: Q):
             q.page['target_video'] = get_target_video(q)
 
         q.page['action_card'] = get_action_card_video(q)
-
-        q.page['stepper'] = get_stepper(q)
 
     await q.page.save()

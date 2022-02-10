@@ -96,6 +96,7 @@ async def run(q: Q):
     q.app.predicted_html = await q.run(to_html, px.imshow(image))
     q.app.detection_complete = True
 
+    print('Sensitivity: ', q.args.sensitivity)
     await make_base_ui(q)
     await q.page.save()
 
@@ -114,6 +115,8 @@ async def play(q: Q):
 
     while success and q.app.reset_video:
 
+        r_image = cv2.resize(img, dsize=(640, 480), interpolation=cv2.INTER_CUBIC)
+
         if count % 5:
             predictions = q.app.model.inference(r_image)
 
@@ -123,7 +126,7 @@ async def play(q: Q):
         await q.site.uplink('stream_1', 'image/jpeg', io.BytesIO(img))
 
         success, img = vidcap.read()
-        r_image = cv2.resize(img, dsize=(640, 480), interpolation=cv2.INTER_CUBIC)
+
 
         count += 1
         time.sleep(FPS)
