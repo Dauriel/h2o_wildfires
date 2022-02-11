@@ -23,29 +23,29 @@ Our approach consists on a lightweight YoloV5s model trained to detect smoke. Th
 
 The solution is in the form of a jupyter notebook that contains detailed descriptions of each step. We developed the code on a Google Colab instance, so just by uploading it and running it fully you should obtain equivalent results to ours.
 
-# Results
-
-![Mosaic of our results](https://github.com/Dauriel/h2o_wildfires/blob/main/detection_sprit.png)
-
-
 
 # Step to run the APP
 
 1. Run wave server
 
-./waved
+```./waved```
 
-2. Open an other session, navigate to the app folder and install the missing requirements
+2. Open an other terminal, navigate to the app folder and install the requirements
 
-cd wave-app-new
-pip install -r requirements.txt
+```cd wave-app-new```
+```pip install -r requirements.txt```
 
 3. Run the application
 
-wave run --no-reload src/app.py 
+```wave run --no-reload src/app.py```
 
 
 ## Please note: 
-In Windows use sdk https://github.com/h2oai/wave/releases/tag/v0.18.0, therefore not the latest version which contains a bug.
+In Windows we used the following sdk version https://github.com/h2oai/wave/releases/tag/v0.18.0, since the latest one contains a small bug on posting images on the server.
 
-On MacOS it's possible to use the latest version: https://github.com/h2oai/wave/releases/tag/v0.20.0
+On MacOS we used the latest sdk version: https://github.com/h2oai/wave/releases/tag/v0.20.0
+
+# Results
+
+![Mosaic of our results](https://github.com/Dauriel/h2o_wildfires/blob/main/detection_sprit.png)
+
