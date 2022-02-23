@@ -20,6 +20,16 @@ Training time: 1.578 hours
 
 The Dataset is provided by AI for Mankind. It is comprised of 2191 labelled images. These images were taken using a HPWREN camera lp-s-mobo-c. This was the only Dataset we found that with this characteristics.
 
+### Metrics
+
+When it comes to selecting a good metric, smoke detection is quite similar to other Computer Vision challenges in the domain of medical imaging. A False Positive is inexpensive, as it just requires someone to verify whether the image contains smoke, whereas a False Negative can be really expensive, as it might lead to a late response and a potential catastrophe (analogously, in medical imaging, a False Positive tumor detection will lead to more tests whereas a False Negative might lead to death).
+
+With this in mind, the two main metrics we should prioritize are True Positives and False Negatives. This ratio is the Recall metric. 
+
+This would be true in normal circumstances. However, given that we are approaching this problem as an Object Detection task, focusing on the Mean Average Precision 0.5:0.95 (mAP@0.5:0.95) allows our model to train and generalize better. 
+
+We obtained our best model checkpoint on the 83rd epoch, with a mAP@0.5:0.95 of 0.31895.
+
 ### Disclaimer
 
 A big limitation of our model is the training data. It contains a small number of images and they all come from a relatively similar context. Due to the nature of this dataset, the model might not perform accurately when exposed to images that vary significantly from the original context the model was trained in. However, given the simplicity of the model and our approach, finetuning the model should not be a problem. 
