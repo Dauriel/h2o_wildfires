@@ -31,4 +31,4 @@ Following the feedbacks from the first submission we developed this we applicati
 * Image: allows to detect smoke given an image
 * Real Time: allows to detect smoke in a video and creates data that fills the following table
 
-![image](https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-145057928.jpg/_jcr_content/renditions/cropped.3_to_1.jpg./cropped.3_to_1.jpg)
+![image](https://www.munichre.com/content/dam/munichre/global/images/royalty-free/GettyImages-145057928.jpg/_jcr_content/renditions/cropped.3_to_1.jpg./cropped.3_to_1.jpg =500x500)
