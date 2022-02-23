@@ -63,6 +63,14 @@ async def layouts(q:Q):
                             ui.zone('r0', size='50%', direction=ui.ZoneDirection.COLUMN),
                         ],
                     ),
+                    ui.zone(
+                        's1',
+                        direction=ui.ZoneDirection.ROW,
+                        zones=[
+                            ui.zone('l1', size='50%', direction=ui.ZoneDirection.COLUMN),
+                            ui.zone('r1', size='50%', direction=ui.ZoneDirection.COLUMN),
+                        ],
+                    ),
                     ui.zone(name='results')
                 ]),
                 # App footer of fixed sized, aligned in the center.

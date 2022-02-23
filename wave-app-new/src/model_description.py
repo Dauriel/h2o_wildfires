@@ -16,25 +16,21 @@ async def model_description(q:Q):
 
     df = q.app.model_metrics
     df['F1'] = 2*df["metrics/precision"] * df["metrics/recall"] / (df["metrics/precision"] + df["metrics/recall"])
-    n = len(df)
 
-    print(df.columns)
-
-    plot0 = await q.run(to_html, px.line(df, x="epoch", y=df.columns[4:6], labels={'Epoch', '%'}))
-    plot1 = await q.run(to_html, px.line(df, x="epoch", y=df.columns[6:8]))
-    plot2 = await q.run(to_html, px.line(df, x="epoch", y="F1"))
-    # plot2 = await q.run(to_html, px.line(df, x="epoch", y="metrics/precision"))
-    # plot3 = await q.run(to_html, px.line(df, x="epoch", y="metrics/precision"))
+    plot_pr = await q.run(to_html, px.line(df, x="epoch", y=['metrics/precision', 'metrics/recall', 'F1'], labels={'Epoch', '%'}))
+    plot_map = await q.run(to_html, px.line(df, x="epoch", y=df.columns[6:8], color_discrete_sequence=px.colors.qualitative.Vivid))
+    # plot_f1 = await q.run(to_html, px.line(df, x="epoch", y="F1"))
 
     q.page['l0'] = ui.form_card(box='l0', items=[
         ui.message_bar(type='info', text='Precision vs Recall plot'),
-        ui.frame(content=plot0, height='400px')
+        ui.frame(content=plot_pr, height='400px')
     ])
 
     q.page['r0'] = ui.form_card(box='r0', items=[
-        ui.message_bar(type='info', text='Precision vs Recall plot'),
-        ui.frame(content=plot2, height='400px')
+        ui.message_bar(type='info', text='MAP DESCRIPTION'),
+        ui.frame(content=plot_map, height='400px')
     ])
+
 
     await q.page.save()
 
