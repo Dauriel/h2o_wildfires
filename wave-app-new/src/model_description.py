@@ -22,7 +22,7 @@ async def model_description(q:Q):
     # plot_f1 = await q.run(to_html, px.line(df, x="epoch", y="F1"))
 
     q.page['l0'] = ui.form_card(box='l0', items=[
-        ui.message_bar(type='info', text=<img src="https://render.githubusercontent.com/render/math?math= \frac{TP}{TP+FP}">),
+        ui.message_bar(type='info', text='$\frac{tp}{k!(n-k)!}$'),
         ui.frame(content=plot_pr, height='400px')
     ])
 
