@@ -38,9 +38,9 @@ A big limitation of our model is the training data. It contains a small number o
 
 Our approach is just the basis and there are many ways in which it can be developed further:
 
-1. - We treat the problem as an object detection problem due to the dataset available. Another approach would be treating it as a binary image classification problem, where images are labelled positive or negative based on the presence of smoke and the model just predicts if there is smoke in the image or not.
-2. - All of the training images are set during the day. Another way of improving the model would be considering different contexts (day, night, etc). Creating a more homogeneous dataset would definitely improve the capability of our model to generalize to other contexts.
-3. - All images come from the same camera. Increase the spectrum of image sizes and resolutions in the dataset would improve the performance of the model.
-4. - Increasing the size of the dataset should also improve the model.
-5. - We did not use any augmentation when training the model. Using some simple augmentations, like HorizontalFlip or CLAHE would also improve this.
-6. - Adding cloud images should also improve the robustness of the model.
+- We treat the problem as an object detection problem due to the dataset available. Another approach would be treating it as a binary image classification problem, where images are labelled positive or negative based on the presence of smoke and the model just predicts if there is smoke in the image or not.
+- All of the training images are set during the day. Another way of improving the model would be considering different contexts (day, night, etc). Creating a more homogeneous dataset would definitely improve the capability of our model to generalize to other contexts.
+- All images come from the same camera. Increase the spectrum of image sizes and resolutions in the dataset would improve the performance of the model.
+- Increasing the size of the dataset should also improve the model.
+- We did not use any augmentation when training the model. Using some simple augmentations, like HorizontalFlip or CLAHE would also improve this.
+- Adding cloud images should also improve the robustness of the model.
