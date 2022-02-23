@@ -27,7 +27,7 @@ async def model_description(q:Q):
     ])
 
     q.page['r0'] = ui.form_card(box='r0', items=[
-        ui.message_bar(type='info', text='MAP DESCRIPTION'),
+        ui.message_bar(type='info', text='The Mean Average Precision (mAP) is a common metric in Object Detection tasks. This metric computes the overlap between the bounding box predicted by the model and the groundtruth bounding box. The higher the score, the bigger of an overlap there is between both. This bounding box overlap has a confidence value, usually set at 0.5. The mAP@0.5:0.95 simply computes the mAP between 0.5 to 0.95 with a 0.05 step'),
         ui.frame(content=plot_map, height='400px')
     ])
 
