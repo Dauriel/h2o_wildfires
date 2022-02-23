@@ -1,4 +1,4 @@
-# TEAM HTB - Last Minute Smoke Detection
+# TEAM HTB - Smoke Detection
 
 We live in a difficult era. Climate change is now the biggest challenge humanity has yet to beat. Intense droughts, storms, rising sea levels, ... are just some of the events that are becoming more and more common nowadays. Extreme temperatures, severe lightning, strong winds, dry weather and droughts create the ideal conditions for the main theme of this competition: Wildfires. 
 
