@@ -34,7 +34,7 @@ def get_target_image_display(q: Q):
         title='Target image',
         items=[
             ui.text(content=''),  # margin top hack
-            ui.text(content=f'![target image]({q.app.target_image})'),
+            ui.text(content=f'![target image]({q.app.target_image})', width="620px"),
             ui.button(name="reset_target_image", label="Reset target image")
         ],
     )
@@ -132,7 +132,7 @@ def get_action_card_video(q: Q):
         box='right',
         title='Action card',
         items=[
-            ui.text('Yolo Model - Smoke Detection'),
+            ui.text('Smoke Detection Model'),
             ui.button(name='play', label='Detect', primary=True, disabled=not q.app.target_video or q.app.running_pipeline),
         ],
     )
@@ -148,17 +148,8 @@ def get_action_card(q: Q):
         box='right',
         title='Parameters',
         items=[
-            ui.text('Yolo Model - Smoke Detection'),
-            ui.slider(
-                name='Sensitivity',
-                label='Sensitivity',
-                min=0,
-                max=100,
-                value=sliderSensitivity,
-                step=1,
-                tooltip='Chose the cutoff sensitivity of the models.',
-            ),
-            ui.button(name='run', label='Detect smoke', primary=True, disabled=not q.app.target_image or q.app.running_pipeline),
+            ui.text('Smoke Detection Model'),
+            ui.button(name='run', label='Detect', primary=True, disabled=not q.app.target_image or q.app.running_pipeline),
         ],
     )
 
@@ -235,6 +226,6 @@ def get_detection_progress_card(q: Q):
     )
 
 def get_predicted_image(q: Q):
-    return ui.form_card(box=ui.box('detection', order=2), items=[
-        ui.frame(content=q.app.predicted_html, height='600px'),
+    return ui.form_card(box='right', items=[
+        ui.frame(content=q.app.predicted_html, height='580px'),
     ])

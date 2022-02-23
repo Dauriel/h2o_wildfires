@@ -94,7 +94,8 @@ async def run(q: Q):
     predictions = q.app.model.inference(im)
     image = q.app.model.create_image(im, predictions)
 
-    q.app.predicted_html = await q.run(to_html, px.imshow(image))
+    q.app.predicted_html = await q.run(to_html,
+                                       px.imshow(image).update_xaxes(showticklabels=False).update_yaxes(showticklabels=False))
     q.app.detection_complete = True
 
     print('Sensitivity: ', q.args.sensitivity)
@@ -119,7 +120,7 @@ async def play(q: Q):
 
         r_image = cv2.resize(img, dsize=(640, 480), interpolation=cv2.INTER_CUBIC)
 
-        if count % 5:
+        if count % 2:
             predictions = q.app.model.inference(r_image)
             for idx, row in predictions.iterrows():
                 issue = []
@@ -127,7 +128,6 @@ async def play(q: Q):
                 issue.append(q.app.target_video.split('/')[-1])
                 issue.append(row.confidence)
                 q.app.issues.append(issue)
-                print("issue", issue)
 
         image = q.app.model.create_image(r_image, predictions)
 
@@ -135,7 +135,6 @@ async def play(q: Q):
         await q.site.uplink('stream_1', 'image/jpeg', io.BytesIO(img))
 
         success, img = vidcap.read()
-
 
         count += 1
         time.sleep(FPS)

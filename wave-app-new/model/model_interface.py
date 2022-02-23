@@ -15,7 +15,7 @@ class ModelInference(object):
                                     'custom',
                                     path=model_checkpoint_path,
                                     force_reload=True)  # local repo
-        self.model.conf = 0.25
+        self.model.conf = 0.2
 
     def inference(self,
                   img: "numpy.ndarray") -> None:

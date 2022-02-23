@@ -1,9 +1,10 @@
 from h2o_wave import main, app, Q, ui
 
 from .ui_utils import init_ui
-from .home import load_history
 from .detection import load_model
 from const import example_images, example_videos
+
+from .model_description import load_metrics
 
 def reset_pipeline_variables(q: Q):
     q.app.running_pipeline = False
@@ -18,7 +19,7 @@ async def init_client(q: Q):
     await init_ui(q)
 
     # Begin application flow with the data tab.
-    q.client.tabs = 'realtime'
+    q.client.tabs = 'model_description'
 
     # Flag client as initialized.
     q.client.initialized = True
@@ -29,8 +30,8 @@ async def init_client(q: Q):
 async def init_app(q:Q):
     # Get the list of available datasets.
     # await load_datasets(q)
-    await load_history(q)
     await load_model(q)
+    await load_metrics(q)
 
     # Load example images
     wave_paths = await q.site.upload([image['path'] for image in example_images])

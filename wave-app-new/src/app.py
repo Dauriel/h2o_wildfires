@@ -2,7 +2,7 @@ from h2o_wave import main, app, Q, ui
 
 from .ui_utils import *
 from .initializers import *
-from . import home, detection, realtime
+from . import home, detection, realtime, model_description
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -43,12 +43,27 @@ async def layouts(q:Q):
                         'split',
                         direction=ui.ZoneDirection.ROW,
                         zones=[
-                            ui.zone('left', size='50%', direction=ui.ZoneDirection.COLUMN),
+                            ui.zone('left', align='center', size='50%', direction=ui.ZoneDirection.COLUMN),
                             ui.zone('right', size='50%', direction=ui.ZoneDirection.COLUMN),
                         ],
                     ),
-                    ui.zone(name='results'),
-                    ui.zone(name='detection', align='start', size='50%', direction=ui.ZoneDirection.ROW)
+                    ui.zone(
+                        'split2',
+                        direction=ui.ZoneDirection.ROW,
+                        zones=[
+                            ui.zone('left-df', size='50%', direction=ui.ZoneDirection.COLUMN),
+                            ui.zone('right-st', size='50%', direction=ui.ZoneDirection.COLUMN),
+                        ],
+                    ),
+                    ui.zone(
+                        's0',
+                        direction=ui.ZoneDirection.ROW,
+                        zones=[
+                            ui.zone('l0', size='50%', direction=ui.ZoneDirection.COLUMN),
+                            ui.zone('r0', size='50%', direction=ui.ZoneDirection.COLUMN),
+                        ],
+                    ),
+                    ui.zone(name='results')
                 ]),
                 # App footer of fixed sized, aligned in the center.
                 ui.zone(name='footer', size='120px', align='center')
@@ -87,6 +102,9 @@ async def handler(q: Q):
         q.app.target_image = None
         await make_base_ui(q)
         await realtime.realtime(q)
+
+    if q.client.tabs == 'model_description':
+        await model_description.model_description(q)
 
 
 

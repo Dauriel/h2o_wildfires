@@ -8,11 +8,12 @@ import numpy as np
 # Tabs for the app's navigation menu.
 tabs = [
     ui.tab(name='home', label='Home'),
+    ui.tab(name='model_description', label='Model'),
     ui.tab(name='detection', label='Image'),
-        ui.tab(name='realtime', label='Real Time')
+    ui.tab(name='realtime', label='Real Time')
 ]
 
-DETECTION = 'Upload an image or select an example image on the left. Then use the "Run" button to run the detection ' \
+DETECTION = 'Upload an image or select an example image on the left. Then use the "Detect" button to run the detection ' \
             'pipeline. This section serve as basic inference example.'
 REALTIME = 'Upload a video or select an example video on the left. Press "Detect" to run the pipeline and show the ' \
            'detection within the video. In our idea, this area should be filled with several real-time cam videos. In ' \
@@ -57,7 +58,7 @@ async def make_markdown_table(fields, rows):
 # Each time a new tab is rendered, clean the 'body' zone, i.e. delete the pages for the other tabs.
 async def reset_pages(q:Q):
     pages = ['df', 'ds', 'map', 'models', 'metrics', 'options', 'target_image', 'target_video', 'action_card',
-             'left', 'right', 'stepper', 'detection']
+             'left', 'right', 'stepper', 'detection', 'right-st', 'left-df']
 
     for page in pages:
         del q.page[page]
@@ -79,16 +80,14 @@ async def make_base_ui(q: Q):
         else:
             q.page['target_image'] = get_target_image(q)
 
-        q.page['action_card'] = get_action_card(q)
-
         q.page['stepper'] = get_stepper(q)
 
         if q.app.detection_complete:
-            q.page['detection'] = get_predicted_image(q)
-        elif q.app.detection_in_progress:
-            q.page['detection'] = get_detection_progress_card(q)
+            q.page['action_card'] = get_predicted_image(q)
+        # elif q.app.detection_in_progress:
+        #    q.page['detection'] = get_detection_progress_card(q)
         else:
-            del q.page['detection']
+            q.page['action_card'] = get_action_card(q)
 
     if q.client.tabs == "realtime":
 
@@ -113,8 +112,6 @@ async def make_base_ui(q: Q):
                 _, img = cv2.imencode('.jpg', r_image.astype(np.uint8))
                 endpoint = await q.site.uplink('stream_1', 'image/jpeg', io.BytesIO(img))
                 q.page['target_video'] = get_target_video_display(q, endpoint)
-
-                await q.page.save()
             else:
                 q.page['target_video'] = get_target_video(q)
         else:

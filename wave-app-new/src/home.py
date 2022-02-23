@@ -32,12 +32,11 @@ columns = [
 # Functions for data tab.
 
 async def home(q:Q):
-
     issues = []
 
     # Home description
     q.page['ds'] = ui.form_card(box=ui.box('description', order=2), items=[
-        ui.message_bar(type='info', text=open('README.MD').read())
+        ui.message_bar(type='info', text=open('data/home.md').read())
     ])
 
     await q.page.save()
@@ -58,7 +57,7 @@ async def home(q:Q):
             )
         )
 
-    q.page['left'] = ui.form_card(box=ui.box('left'), items=[
+    q.page['left-df'] = ui.form_card(box=ui.box('left'), items=[
         ui.text('Detection history'),
         ui.table(
             name='issues',
@@ -74,7 +73,7 @@ async def home(q:Q):
         )
     ])
 
-    q.page['right'] = ui.form_card(box=ui.box('right'), items=[
+    q.page['right-st'] = ui.form_card(box=ui.box('right'), items=[
         ui.text('Stats')
     ])
 
