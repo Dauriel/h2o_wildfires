@@ -22,7 +22,7 @@ async def model_description(q:Q):
     # plot_f1 = await q.run(to_html, px.line(df, x="epoch", y="F1"))
 
     q.page['l0'] = ui.form_card(box='l0', items=[
-        ui.message_bar(type='info', text='\frac{tp}{k!(n-k)!}'),
+        ui.message_bar(type='info', text='Precision is the ratio between True Positives and all predictions. This metric describes how accurate our model is when detecting smoke on an image. On the other hand, Recall is the ratio between True Positives and all possible positives. To describe this simply: A low precision implies that from all the predictions a model does, only a low percentage are correct, whereas a high precision implies that the predictions the model does are mostly accurate. On the other hand, a low recall implies that the model only finds a small percentage of the possible predictions, whereas a high recall implies that the model is capable of finding most of positives available.'),
         ui.frame(content=plot_pr, height='400px')
     ])
 
