@@ -20,7 +20,7 @@ class Issue:
 # Create columns for our issue table.
 columns = [
     ui.table_column(name='created', label='Timestamp', sortable=True, data_type='time'),
-    ui.table_column(name='file', label='File Name', sortable=True, searchable=True),
+    ui.table_column(name='file', label='Camera Name', sortable=True, searchable=True),
     ui.table_column(name='tag', label='Smoke Detected', cell_type=ui.tag_table_cell_type(name='tags', tags=[
                     ui.tag(label='FATAL', color='$red'),
                     ui.tag(label='WARNING', color='$yellow')
@@ -73,16 +73,16 @@ async def report(q:Q):
 
     q.page.save()
 
-    fig = px.line(df, x='Timestamp', y='Confidence', color='Camera', title='Time Series with Rangeslider')
+    fig = px.line(df, x='Timestamp', y='Confidence', color='Camera', title='Detection history')
     fig.update_xaxes(rangeslider_visible=True)
-    fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=-.50, xanchor="right", x=1))
+    fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=-.90, xanchor="right", x=1))
     plt = await q.run(to_html, fig)
 
     q.page['right-st'] = ui.form_card(box='right-st', items=[
         ui.frame(content=plt, height='500px')
     ])
 
-    fig = px.line(df, x='Timestamp', y='Confidence', color='Camera',title='Time Series with Rangeslider')
+    fig = px.line(df, x='Timestamp', y='Confidence', color='Camera', title='Time Series with Rangeslider')
     fig.update_xaxes(rangeslider_visible=True)
 
     await q.page.save()
