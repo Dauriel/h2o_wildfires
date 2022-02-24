@@ -130,7 +130,7 @@ def get_action_card_video(q: Q):
 
     return ui.form_card(
         box='right',
-        title='Action card',
+        title='Video uploaded',
         items=[
             ui.text('Smoke Detection Model'),
             ui.button(name='play', label='Detect', primary=True, disabled=not q.app.target_video or q.app.running_pipeline),
