@@ -35,10 +35,8 @@ async def report(q:Q):
     issues = []
 
     # Home description
-    q.page['ds'] = ui.form_card(box=ui.box('description', order=2), items=[
-        ui.message_bar(type='info', text="This section serves as report of real time detection. Here we can monitor "
+    q.page['ds'] = ui.article_card(box=ui.box('description', order=2), title='', content="### This section serves as a report of real time detection. Here we can monitor "
                                          "the timestamp and the occurences of smoke for a specific video/camera.")
-    ])
 
     # get history dataframe
     df = pd.DataFrame(q.app.issues, columns =['Timestamp', 'Camera', 'Confidence'])

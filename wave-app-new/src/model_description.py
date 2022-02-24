@@ -4,9 +4,7 @@ from .plot import *
 import pandas as pd
 
 async def model_description(q:Q):
-    q.page['ds'] = ui.form_card(box='description', items=[
-        ui.message_bar(type='info', text=open('data/model.md').read())
-    ])
+    q.page['ds'] = ui.article_card(box='description', title='Technical Documentation', content=open('data/model.md').read())
 
     df = q.app.model_metrics
     df['F1'] = 2*df["precision"] * df["recall"] / (df["precision"] + df["recall"])
@@ -25,8 +23,8 @@ async def model_description(q:Q):
 
     q.page['r0'] = ui.small_stat_card(
         box='r0',
-        title="mAP:0.5:0.95",
-        value="0.31895",
+        title="mAP:0.5",
+        value="0.7156",
     )
 
     fig = px.line(df, x="epoch", y=['precision', 'recall', 'F1'])

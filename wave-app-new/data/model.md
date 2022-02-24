@@ -1,5 +1,3 @@
-## Technical Documentation
-
 ### Summary
 Our approach consists on a lightweight Yolo model trained to detect smoke. This model is trained over the [Wildfire Smoke Detection Dataset](https://github.com/aiformankind/wildfire-smoke-detection-research) created by [AI for Mankind](https://aiformankind.org/).
 

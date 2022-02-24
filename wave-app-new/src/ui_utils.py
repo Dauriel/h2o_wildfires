@@ -14,9 +14,9 @@ tabs = [
     ui.tab(name='report', label='Report')
 ]
 
-DETECTION = 'Upload an image or select an example image on the left. Then use the "Detect" button to run the detection ' \
+DETECTION = '### Upload an image or select an example image on the left. Then use the "Detect" button to run the detection ' \
             'pipeline. This section serve as basic inference example.'
-REALTIME = 'Upload a video or select an example video on the left. Press "Detect" to run the pipeline and show the ' \
+REALTIME = '### Upload a video or select an example video on the left. Press "Detect" to run the pipeline and show the ' \
            'detection within the video. In our idea, this area should be filled with several real-time cam videos. In ' \
            'this way, this app would be useful to monitor the presence of wildfires in very wide territories with the ' \
            'using of AI techniques.<br>**If the video does not load at the first attempt, please press the reset ' \
@@ -72,9 +72,7 @@ async def make_base_ui(q: Q):
 
     if q.client.tabs == "detection":
         # Image detection description
-        q.page['ds'] = ui.form_card(box=ui.box('description', order=2), items=[
-            ui.message_bar(type='info', text=DETECTION)
-        ])
+        q.page['ds'] = ui.article_card(box=ui.box('description', order=2), title='', content=DETECTION)
 
         if (q.app.target_image):
             q.page['target_image'] = get_target_image_display(q)
@@ -93,10 +91,7 @@ async def make_base_ui(q: Q):
     if q.client.tabs == "realtime":
 
         # Realtime description
-        q.page['ds'] = ui.form_card(box=ui.box('description', order=2), items=[
-            ui.message_bar(type='info', text=REALTIME)
-        ])
-
+        q.page['ds'] = ui.article_card(box=ui.box('description', order=2), title='', content=REALTIME)
         if (q.app.target_video):
 
             q.page['hm'] = ui.form_card(box=ui.box('home', order=2), items=[
