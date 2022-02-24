@@ -15,7 +15,7 @@ Currently, there are some fire lookouts in towers that are used as a means of ea
 
 Our approach intends to solve and automate this by using a lightweight AI-based prediction model to automatically detect the emergence of smoke. This model could be used with a real time image system to rapidly alert the authorities would it detect smoke in a given camera or recording device.
 
-Unfortunately, we found out about this challenge just one week ago, so we have treated it as a hackathon, prioritizing efficiency whilst trying to tackle a small subset of the problem.
+The model can also be deployed on site on low-power embedded systems, allowing lookout stations to autonomously decide when to upload data. This approach could dramatically reduce the bandwidth and power consumed by each station, lowering the cost of installing and operating individual nodes, and enabling wider deployment to a larger number of monitoring sites.
 
 <br/>
 
@@ -27,7 +27,8 @@ Unfortunately, we found out about this challenge just one week ago, so we have t
 
 Following the feedbacks from the first submission we developed this we application exploiting the H2O-WAVE framework. The main sections are:
 
-* Home: this page, contains task and solution description 
+* Home: this page, contains task and solution description
+* Model: describe the model and the performances
 * Image: allows to detect smoke given an image
 * Real Time: allows to detect smoke in a video and creates data that fills the following table
-* Model: describe the model and the performances
+* Report: Monitoring details of the real time detection
