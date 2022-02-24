@@ -2,7 +2,7 @@ from h2o_wave import main, app, Q, ui
 
 from .ui_utils import *
 from .initializers import *
-from . import home, detection, realtime, model_description
+from . import home, detection, realtime, model_description, report
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -115,5 +115,7 @@ async def handler(q: Q):
     if q.client.tabs == 'model_description':
         await model_description.model_description(q)
 
+    if q.client.tabs == 'report':
+        await report.report(q)
 
 

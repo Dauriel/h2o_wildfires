@@ -1,8 +1,6 @@
-from .model import *
-from const import example_images
-
+from h2o_wave import main, app, Q, ui
 import plotly.express as px
-
+from .plot import *
 import pandas as pd
 
 async def model_description(q:Q):

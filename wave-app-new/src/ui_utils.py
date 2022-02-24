@@ -10,7 +10,8 @@ tabs = [
     ui.tab(name='home', label='Home'),
     ui.tab(name='model_description', label='Model'),
     ui.tab(name='detection', label='Image'),
-    ui.tab(name='realtime', label='Real Time')
+    ui.tab(name='realtime', label='Real Time'),
+    ui.tab(name='report', label='Report')
 ]
 
 DETECTION = 'Upload an image or select an example image on the left. Then use the "Detect" button to run the detection ' \
