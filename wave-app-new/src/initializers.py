@@ -19,7 +19,7 @@ async def init_client(q: Q):
     await init_ui(q)
 
     # Begin application flow with the data tab.
-    q.client.tabs = 'model_description'
+    q.client.tabs = 'home'
 
     # Flag client as initialized.
     q.client.initialized = True
