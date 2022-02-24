@@ -16,19 +16,5 @@ we find that it is not ideal for high risk areas. These areas can be monitored b
 
 Currently, there are some fire lookouts in towers that are used as a means of early detection of forest fires. However, accurate human observation may be limited by operator fatigue, time of day, time of year, and geographic location. Automatic computerized systems have gained popularity in recent years as a possible resolution to human operator error. A government report on a recent trial of three automated camera fire detection systems in Australia did, however, conclude "...detection by the camera systems was slower and less reliable than by a trained human observer".
 
-Our approach intends to solve and automate this by using a lightweight AI-based prediction model to automatically detect the emergence of smoke. This model could be used with a real time image system to rapidly alert the authorities would it detect smoke in a given camera or recording device.
-
-### Technical Documentation
-
-Our approach consists on a lightweight YoloV5s model trained to detect smoke. This model is trained over the [Wildfire Smoke Detection Dataset](https://github.com/aiformankind/wildfire-smoke-detection-research) created by [AI for Mankind](https://aiformankind.org/).
-
-The solution is in the form of a jupyter notebook that contains detailed descriptions of each step. We developed the code on a Google Colab instance, so just by uploading it and running it fully you should obtain equivalent results to ours.
-
-### AI WAVE App
-
-Following the feedbacks from the first submission we developed this we application exploiting the H2O-WAVE framework. The main sections are:
-
-* Home: this page, contains task description and technical details, along with a table reporting past predictions
-* Image: allows to detect smoke given an image
-* Real Time: allows to detect smoke in a video and creates data that fills the following table
+Our approach provides a lightweight AI-based prediction model and framework to automatically detect the emergence of smoke, which can be easily trained and adapted to the physical conditions of the area to be monitored. This model could be used with a real time image system to rapidly alert the authorities would it detect smoke in a given camera or recording device.
 
