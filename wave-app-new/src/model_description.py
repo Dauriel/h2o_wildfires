@@ -4,7 +4,7 @@ from .plot import *
 import pandas as pd
 
 async def model_description(q:Q):
-    q.page['ds'] = ui.article_card(box='description', title='Technical Documentation', content=open('data/model.md').read())
+    q.page['ds'] = ui.article_card(box='results', title='Technical Documentation', content=open('data/model.md').read())
 
     df = q.app.model_metrics
     df['F1'] = 2*df["precision"] * df["recall"] / (df["precision"] + df["recall"])
@@ -36,13 +36,13 @@ async def model_description(q:Q):
     plot_map = await q.run(to_html, fig)
 
     q.page['l1'] = ui.form_card(box='l1', items=[
+        ui.frame(content=plot_pr, height='500px'),
         ui.message_bar(type='info', text='Precision is the ratio between True Positives and all predictions. This metric describes how accurate our model is when detecting smoke on an image. On the other hand, Recall is the ratio between True Positives and all possible positives. To describe this simply: A low precision implies that from all the predictions a model does, only a low percentage are correct, whereas a high precision implies that the predictions the model does are mostly accurate. On the other hand, a low recall implies that the model only finds a small percentage of the possible predictions, whereas a high recall implies that the model is capable of finding most of positives available.'),
-        ui.frame(content=plot_pr, height='500px')
     ])
 
     q.page['r1'] = ui.form_card(box='r1', items=[
+        ui.frame(content=plot_map, height='500px'),
         ui.message_bar(type='info', text='The Mean Average Precision (mAP) is a common metric in Object Detection tasks. This metric computes the overlap between the bounding box predicted by the model and the groundtruth bounding box. The higher the score, the bigger of an overlap there is between both. This bounding box overlap has a confidence value, usually set at 0.5. The mAP@0.5:0.95 simply computes the mAP between 0.5 to 0.95 with a 0.05 step'),
-        ui.frame(content=plot_map, height='500px')
     ])
 
 
