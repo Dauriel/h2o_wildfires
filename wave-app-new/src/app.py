@@ -59,8 +59,9 @@ async def layouts(q:Q):
                         's0',
                         direction=ui.ZoneDirection.ROW,
                         zones=[
-                            ui.zone('l0', size='50%', direction=ui.ZoneDirection.COLUMN),
-                            ui.zone('r0', size='50%', direction=ui.ZoneDirection.COLUMN),
+                            ui.zone('l0', size='33%', direction=ui.ZoneDirection.COLUMN),
+                            ui.zone('c0', size='33%', direction=ui.ZoneDirection.COLUMN),
+                            ui.zone('r0', size='33%', direction=ui.ZoneDirection.COLUMN),
                         ],
                     ),
                     ui.zone(
