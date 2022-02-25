@@ -1,10 +1,12 @@
 from h2o_wave import main, app, Q, ui
 import pandas as pd
 import plotly.express as px
-from .plot import *
+import plotly
+from plotly.missing_ipywidgets import FigureWidget
 
-import time
-
+def to_html(fig: FigureWidget):
+    config = {'scrollZoom': False, 'showLink': False, 'displayModeBar': False}
+    return plotly.io.to_html(fig, validate=False, include_plotlyjs='cdn', config=config)
 _id = 0
 
 class Issue:

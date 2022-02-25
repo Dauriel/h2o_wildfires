@@ -1,3 +1,5 @@
+import os
+import cv2
 from h2o_wave import main, app, Q, ui
 
 from .components import *
@@ -15,7 +17,7 @@ tabs = [
 ]
 
 DETECTION = '### Upload an image or select an example image on the left. Then use the "Detect" button to run the detection ' \
-            'pipeline. This section serve as a basic inference example.'
+            'pipeline. This section serves as a basic inference example.'
 REALTIME = '### Upload a video or select an example video on the left. Press "Detect" to run the pipeline and show the ' \
            'detection within the video. In the final production product, this area would be filled with several real-time cam videos. In ' \
            'this way, this app would be useful to monitor the presence of wildfires in wide territories ' \
@@ -93,10 +95,6 @@ async def make_base_ui(q: Q):
         q.page['ds'] = ui.article_card(box=ui.box('description', order=2), title='', content=REALTIME)
         if (q.app.target_video):
 
-            q.page['hm'] = ui.form_card(box=ui.box('home', order=2), items=[
-                ui.message_bar(type='info', text=open('README.MD').read())
-            ])
-
             hub_address = os.environ.get(f'H2O_WAVE_ADDRESS', 'http://127.0.0.1:10101')
             vidcap = cv2.VideoCapture(f'{hub_address}{q.app.target_video}')
             success, image = vidcap.read()
@@ -111,6 +109,8 @@ async def make_base_ui(q: Q):
                 q.page['target_video'] = get_target_video(q)
         else:
             q.page['target_video'] = get_target_video(q)
+
+        q.page['stepper'] = get_stepper(q)
 
         q.page['action_card'] = get_action_card_video(q)
 

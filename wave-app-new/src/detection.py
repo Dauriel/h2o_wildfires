@@ -1,9 +1,6 @@
-import os
 from .ui_utils import *
 from .handlers import *
 from model.model_interface import ModelInference
-import torch
-import sys
 
 TOOL_INFO = ''' This page allows to create smoke detection starting from images; '''
 

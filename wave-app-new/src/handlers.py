@@ -1,6 +1,6 @@
+import os
 from .components import *
 from .ui_utils import make_base_ui
-from .plot import to_html
 
 import plotly.express as px
 
@@ -11,6 +11,13 @@ import io
 
 import datetime
 import time
+
+import plotly
+from plotly.missing_ipywidgets import FigureWidget
+
+def to_html(fig: FigureWidget):
+    config = {'scrollZoom': False, 'showLink': False, 'displayModeBar': False}
+    return plotly.io.to_html(fig, validate=False, include_plotlyjs='cdn', config=config)
 
 def reset_pipeline_variables(q: Q):
     q.app.running_pipeline = False
@@ -32,6 +39,7 @@ async def open_example_image_dialog(q: Q):
 async def example_image_chosen(q: Q):
     q.page['meta'].dialog = None
     q.app.target_image = q.args.example_image_selected
+    q.app.upload_complete = True
     await make_base_ui(q)
 
 
@@ -77,6 +85,7 @@ async def open_upload_video_dialog(q: Q):
 async def example_video_chosen(q: Q):
     await reset_target_video(q)
     q.page['meta'].dialog = None
+    q.app.upload_complete = True
     q.app.target_video = q.args.example_video_selected
     await make_base_ui(q)
 
@@ -86,6 +95,7 @@ async def example_video_chosen(q: Q):
 
 async def run(q: Q):
     q.app.detection_in_progress = True
+    q.app.upload_complete = True
     await make_base_ui(q)
 
     hub_address = os.environ.get(f'H2O_WAVE_ADDRESS', 'http://127.0.0.1:10101')
@@ -98,13 +108,14 @@ async def run(q: Q):
                                        px.imshow(image).update_xaxes(showticklabels=False).update_yaxes(showticklabels=False))
     q.app.detection_complete = True
 
-    print('Sensitivity: ', q.args.sensitivity)
     await make_base_ui(q)
     await q.page.save()
 
 async def play(q: Q):
     q.app.detection_in_progress = True
-
+    q.app.upload_complete = True
+    await make_base_ui(q)
+    
     hub_address = os.environ.get(f'H2O_WAVE_ADDRESS', 'http://127.0.0.1:10101')
     vidcap = cv2.VideoCapture(f'{hub_address}{q.app.target_video}')
     success, img = vidcap.read()
@@ -140,5 +151,6 @@ async def play(q: Q):
         time.sleep(FPS)
 
     print('VIDEO - DONE')
+    q.app.detection_complete = True
     await make_base_ui(q)
     await q.page.save()

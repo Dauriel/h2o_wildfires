@@ -1,8 +1,14 @@
 from h2o_wave import main, app, Q, ui
 import plotly.express as px
-from .plot import *
 import pandas as pd
 
+import plotly
+from plotly.missing_ipywidgets import FigureWidget
+
+def to_html(fig: FigureWidget):
+    config = {'scrollZoom': False, 'showLink': False, 'displayModeBar': False}
+    return plotly.io.to_html(fig, validate=False, include_plotlyjs='cdn', config=config)
+    
 async def model_description(q:Q):
     q.page['ds'] = ui.article_card(box='results', title='Technical Documentation', content=open('data/model.md').read())
 

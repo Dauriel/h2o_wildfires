@@ -1,21 +1,13 @@
-import os
 from .ui_utils import *
 from .handlers import *
 import io
 from .ui_utils import make_base_ui
-import time
-import uuid
 
 import cv2
 from h2o_wave import app, Q, ui, main
 import numpy as np
 
 frame_count = 256
-
-import pandas as pd
-
-import time
-
 _id = 0
 
 class Issue:
@@ -65,6 +57,8 @@ async def realtime(q:Q):
 
     elif q.args.target_video_upload:
         await target_video_upload(q)
+        q.app.upload_complete = True
+        await make_base_ui(q)
 
     elif q.args.play:
         q.app.reset_video = True

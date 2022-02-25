@@ -2,7 +2,7 @@ from h2o_wave import main, app, Q, ui
 
 from .ui_utils import *
 from .initializers import *
-from . import home, detection, realtime, model_description, report
+from . import detection, realtime, model_description, report
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -95,7 +95,7 @@ async def handler(q: Q):
     if q.client.tabs == "home":
         reset_pipeline_variables(q)
         await make_base_ui(q)
-        await home.home(q)
+        await home(q)
 
     # Handler for each tab / menu option.
     if q.client.tabs == "detection":
@@ -118,4 +118,8 @@ async def handler(q: Q):
     if q.client.tabs == 'report':
         await report.report(q)
 
+async def home(q:Q):
+    # Home description
+    q.page['ds'] = ui.article_card(box=ui.box('description', order=2), title="TEAM HTB - Smoke Detection", content=open('data/home.md').read())
 
+    await q.page.save()

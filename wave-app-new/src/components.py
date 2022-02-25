@@ -1,6 +1,5 @@
-import os
+from h2o_wave import main, app, Q, ui
 from .ui_utils import *
-import cv2
 
 """
     Images components
@@ -34,7 +33,7 @@ def get_target_image_display(q: Q):
         title='Target image',
         items=[
             ui.text(content=''),  # margin top hack
-            ui.text(content=f'![target image]({q.app.target_image})', width="620px"),
+            ui.text(content=f'![target image]({q.app.target_image})', width="100%"),
             ui.button(name="reset_target_image", label="Reset target image")
         ],
     )
@@ -126,13 +125,12 @@ async def make_example_video_dialog(q: Q):
     await q.page.save()
 
 def get_action_card_video(q: Q):
-    sliderSensitivity = q.args.sensitivity if 'sensitivity' in q.args else 60
 
     return ui.form_card(
         box='right',
-        title='Video uploaded',
+        title='Detect smoke in video',
         items=[
-            ui.text('Smoke Detection Model'),
+            ui.text(''),
             ui.button(name='play', label='Detect', primary=True, disabled=not q.app.target_video or q.app.running_pipeline),
             ui.message_bar(type='info', text='If the video does not load at the first attempt, please press the reset button and try to upload it again.')
         ],
@@ -143,16 +141,16 @@ def get_action_card_video(q: Q):
 """
 
 def get_action_card(q: Q):
-    sliderSensitivity = q.args.sensitivity if 'sensitivity' in q.args else 60
-
-    return ui.form_card(
+    card = ui.form_card(
         box='right',
-        title='Parameters',
+        title='Detect smoke in image',
         items=[
-            ui.text('Smoke Detection Model'),
+            ui.text(content=''),
             ui.button(name='run', label='Detect', primary=True, disabled=not q.app.target_image or q.app.running_pipeline),
         ],
     )
+
+    return card
 
 async def make_upload_image_dialog(q: Q):
     q.page['meta'].dialog = None
@@ -216,14 +214,6 @@ def get_stepper(q: Q):
                 ],
             )
         ],
-    )
-
-def get_detection_progress_card(q: Q):
-    return ui.form_card(
-        box='detection',
-        items=[
-            ui.progress(label='Detection in progress', caption='Working...')
-        ]
     )
 
 def get_predicted_image(q: Q):
