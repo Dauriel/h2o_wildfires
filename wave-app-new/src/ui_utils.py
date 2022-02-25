@@ -15,12 +15,11 @@ tabs = [
 ]
 
 DETECTION = '### Upload an image or select an example image on the left. Then use the "Detect" button to run the detection ' \
-            'pipeline. This section serve as basic inference example.'
+            'pipeline. This section serve as a basic inference example.'
 REALTIME = '### Upload a video or select an example video on the left. Press "Detect" to run the pipeline and show the ' \
-           'detection within the video. In our idea, this area should be filled with several real-time cam videos. In ' \
-           'this way, this app would be useful to monitor the presence of wildfires in very wide territories with the ' \
-           'using of AI techniques.<br>**If the video does not load at the first attempt, please press the reset ' \
-           'button and try to upload it again.** '
+           'detection within the video. In the final production product, this area would be filled with several real-time cam videos. In ' \
+           'this way, this app would be useful to monitor the presence of wildfires in wide territories ' \
+           'efficiently and effectively by using our Smoke detection model.<br> '
 
 
 # Display header and footer just once per client.

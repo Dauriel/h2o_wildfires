@@ -1,13 +1,11 @@
 ### Summary
-Our approach consists on a lightweight Yolo model trained to detect smoke. This model is trained over the [Wildfire Smoke Detection Dataset](https://github.com/aiformankind/wildfire-smoke-detection-research) created by [AI for Mankind](https://aiformankind.org/).
-
-The solution is in the form of a jupyter notebook that contains detailed descriptions of each step. We developed the code on a Google Colab instance, so just by uploading it and running it fully you should obtain equivalent results to ours.
+Our approach consists on a lightweight [YOLOv5](https://github.com/ultralytics/yolov5) model trained to detect smoke. This model is trained over the [Wildfire Smoke Detection Dataset](https://github.com/aiformankind/wildfire-smoke-detection-research) created by [AI for Mankind](https://aiformankind.org/).
 
 ### Model description
 
 | Info       |          |
 |------------|----------|
-| Model      | Yolov5s6 |
+| Model      | YOLOv5s6 |
 | Batch size | 32       |
 | Img size   | 64       |
 | Epochs     | 100      |
@@ -40,5 +38,5 @@ Our approach is just the basis and there are many ways in which it can be develo
 - All of the training images are set during the day. Another way of improving the model would be considering different contexts (day, night, etc). Creating a more homogeneous dataset would definitely improve the capability of our model to generalize to other contexts.
 - All images come from the same camera. Increase the spectrum of image sizes and resolutions in the dataset would improve the performance of the model.
 - Increasing the size of the dataset should also improve the model.
-- We did not use any augmentation when training the model. Using some simple augmentations, like HorizontalFlip or CLAHE would also improve this.
+- We did not use any data augmentation when training the model. Using some simple augmentations, like HorizontalFlip or CLAHE would also improve this.
 - Adding cloud images should also improve the robustness of the model.

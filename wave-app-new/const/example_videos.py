@@ -4,11 +4,11 @@ prefix = './data/videos'
 
 example_videos = [
   {
-    'path': os.path.join('.', 'data', 'videos', '1.mp4'),
+    'path': os.path.join('.', 'data', 'videos', 'Volcan_Mountain_South.mp4'),
     'label': 'Cam video with wildfire'
   },
   {
-    'path': os.path.join('.', 'data', 'videos', '2.mp4'),
+    'path': os.path.join('.', 'data', 'videos', 'Lyons_Peak_North.mp4'),
     'label': 'Cam video with barely visible smoke'
   }
 ]

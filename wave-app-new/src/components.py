@@ -11,7 +11,7 @@ def get_target_image(q: Q):
         box='left',
         title='Input image card',
         items=[
-            ui.text('Pick an image and detect smoke with the run button.'),
+            ui.text('Pick an image and detect smoke with the detect button.'),
 
             ui.text(''),  # margin top hack
 
@@ -60,7 +60,7 @@ def get_target_video(q: Q):
         box='left',
         title='Input video card',
         items=[
-            ui.text('Pick a video and detect smoke with the run button.'),
+            ui.text('Pick a video and detect smoke with the detect button.'),
 
             ui.text(''),  # margin top hack
 
@@ -134,6 +134,7 @@ def get_action_card_video(q: Q):
         items=[
             ui.text('Smoke Detection Model'),
             ui.button(name='play', label='Detect', primary=True, disabled=not q.app.target_video or q.app.running_pipeline),
+            ui.message_bar(type='info', text='If the video does not load at the first attempt, please press the reset button and try to upload it again.')
         ],
     )
 
