@@ -14,7 +14,7 @@ class ModelInference(object):
         self.model = torch.hub.load(yolov5_folder_path,
                                     'custom',
                                     path=model_checkpoint_path,
-                                    force_reload=True)  # local repo
+                                    force_reload=False)  # local repo
         self.model.conf = 0.2
 
     def inference(self,
