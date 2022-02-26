@@ -1,12 +1,12 @@
 [App]
-Name = "challenge-wildfires-submission-<fill your team name>"
+Name = "challenge-wildfires-submission-htb"
 Version = "1.0"
-Title = "Wildfire Challenge Submission Title <Team>"
-Description = "Wildfire Challenge Submission Description <Team>."
+Title = "Wildfire Challenge Submission Smoke Detection - HTB"
+Description = "Wildfire Challenge Submission Description HTB."
 LongDescription = "about.md"
 Tags = ["WILDFIRES"]
 
 [Runtime]
 Module = "src.app"
-MemoryLimit = "5Gi"
-MemoryReservation = "1Gi"
+MemoryLimit = "10Gi"
+MemoryReservation = "10Gi"

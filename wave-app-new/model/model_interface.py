@@ -11,10 +11,11 @@ class ModelInference(object):
         :param yolov5_folder_path: (str) Path to the git cloned folder (git clone https://github.com/ultralytics/yolov5.git)
         :param model_checkpoint_path: (str) Path to the yolov5s6 checkpoint
         """
-        self.model = torch.hub.load(yolov5_folder_path,
+        self.model = torch.hub.load("./yolov5",
                                     'custom',
                                     path=model_checkpoint_path,
-                                    force_reload=False)  # local repo
+                                    source = "local",
+                                    force_reload=True)  # local repo
         self.model.conf = 0.2
 
     def inference(self,
